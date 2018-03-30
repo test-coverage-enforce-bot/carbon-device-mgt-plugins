@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!--
   ~ /*
   ~ *  Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
@@ -16,9 +17,7 @@
   ~ * specific language governing permissions and limitations
   ~ * under the License.
   ~ */
-  -->
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
         <artifactId>android-plugin</artifactId>
@@ -75,7 +74,16 @@
                             <outputDirectory>${basedir}/target/coverage-reports/site</outputDirectory>
                         </configuration>
                     </execution>
-                </executions>
+                <execution>
+	<id>default-check</id>
+	<goals>
+		<goal>check</goal>
+	</goals>
+	<configuration>
+		<dataFile>target/jacoco.exec</dataFile>
+	</configuration>
+</execution>
+        </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -87,7 +95,8 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
                     </suiteXmlFiles>
-                </configuration>
+                <argLine>${argLine}</argLine>
+        </configuration>
             </plugin>
         </plugins>
     </build>
@@ -110,9 +119,9 @@
                                 </goals>
                                 <configuration>
                                     <tasks>
-                                        <copy todir="${basedir}/../../../repository/deployment/server/webapps" overwrite="true">
+                                        <copy overwrite="true" todir="${basedir}/../../../repository/deployment/server/webapps">
                                             <fileset dir="${basedir}/target">
-                                                <include name="api#device-mgt#android#v0.9.war" />
+                                                <include name="api#device-mgt#android#v0.9.war"/>
                                             </fileset>
                                         </copy>
                                     </tasks>
